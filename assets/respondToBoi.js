@@ -1,4 +1,4 @@
-function generateBasicResponse(message) {
+function generateBasicResponse(message, callback) {
     let isQuestion = 0;
 
     //Check if question
@@ -9,14 +9,9 @@ function generateBasicResponse(message) {
         }
     }
 
-    $.post("./ajax.php", { call: "insertText", message: message, isQuestion: isQuestion }, result => {
 
-        //console.log(result);
-
-    });
-
-    
     if (isQuestion == 1) {
+        
         // Wolfram Alpha Api Inclusion
         let question = message
         while (question.includes(" ")) {
@@ -26,22 +21,26 @@ function generateBasicResponse(message) {
             question = question.replace("?", "%3f")
         }
 
-        let url = "http://api.wolframalpha.com/v1/conversation.jsp?appid=77AG43-XX9RTX6KAA&i=";
-        url = url.concat(question);
+        $.post("./ajax.php", {call: "wolframApiCall", question}, result => {
 
-        console.log(url);
+            let json = JSON.parse(result);
 
-        $.post("./ajax.php", { call: "insertTextWithResponse", message: message, isQuestion: isQuestion, response:response }, result => {
-        
-        
+            $.post("./ajax.php", { call: "insertTextWithResponse", message: message, isQuestion: isQuestion, response:json.result }, result => {
+
+                //console.log(result);
+
+            });
+
+            callback(json.result);
+
         });
 
     } else if (message.includes("good") || message.includes("nice") || message.includes("excellent")) {
-        return "That good to hear. Do you have any more questions";
+        callback("That good to hear. Do you have any more questions");
     } else if (message.includes("bad") || message.includes("not nice") || message.includes("tragic")) {
-        return "That sad to hear. Do you have any more questions";
+        callback("That sad to hear. Do you have any more questions");
     } else {
-        return "tragic";
+        callback("tragic");
     }
     
 
@@ -49,10 +48,14 @@ function generateBasicResponse(message) {
 
 function respondToBoi(message, callBack2) {
     
-    $.post("./ajax.php", { call: "checkMessage", message: message }, result => {
+     $.post("./ajax.php", { call: "checkMessage", message: message }, result => {
 
         if (result == "oci33u@whfo3&243igh324)3aoi423uh") {
-            callBack2(generateBasicResponse(message));
+            generateBasicResponse(message, generateBasicResponseCallback);
+
+            function generateBasicResponseCallback(res) {
+                callBack2(res);
+            }
         } else {
             //console.log("lad");
             callBack2(result);

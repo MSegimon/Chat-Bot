@@ -40,6 +40,10 @@ if (isset($_POST["call"])) {
 
         dbQuery("INSERT INTO `chatbot`(`id`, `text`, `isQuestion`, `response`) VALUES (null,?,?,?)", array($_POST["message"], $_POST["isQuestion"], $_POST["response"]));
 
+    } elseif ($_POST["call"] == "wolframApiCall") {
+
+        echo file_get_contents("https://api.wolframalpha.com/v1/conversation.jsp?appid=77AG43-XX9RTX6KAA&i=" . $_POST["question"]);
+
     }
 
 }

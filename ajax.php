@@ -20,15 +20,13 @@ if (isset($_POST["call"])) {
     } elseif ($_POST["call"] == "checkMessage") {
         
         $response = dbQuery("SELECT `response` FROM `chatbot` WHERE `text`=?", array($_POST["message"]))[0];
-        $isWolfram = dbQuery("SELECT `isWolframResponse` FROM `chatbot` WHERE `text`=?", array($_POST["message"]))[0];
         //$questionCheck = dbQuery("SELECT `isQuestion` FROM `chatbot` WHERE `text`=?", array($_POST["message"]))[0];
-        $timestamp = time();
-        $time = dbQuery("SELECT `timestamp` FROM `chatbot` WHERE `text`=?", array($_POST["message"]))[0][0];
-        $timeElapsed = $timestamp - $time;
+        $time = time();
+        $timeElapsed = $time - $response["timestamp"];
 
         if (isset($response)) {
             
-            if ($isWolfram == 1 && $timeElapsed <= 604800) {
+            if ($response["isWolframResponse"] == 1 && $timeElapsed > 604800) {
                 echo "oci33u@whfo3&243igh324)3aoi423uh";
             } else {
                 echo $response["response"];   
@@ -46,6 +44,7 @@ if (isset($_POST["call"])) {
 
     } elseif ($_POST["call"] == "insertTextWithResponse") {
 
+        dbQuery("DELETE FROM `chatbot` WHERE `text`=?", array($_POST["message"]));
         dbQuery("INSERT INTO `chatbot`(`id`, `text`, `isQuestion`, `response`, `isWolframResponse`, `timestamp`) VALUES (null,?,?,?,?,?)", array($_POST["message"], $_POST["isQuestion"], $_POST["response"], $_POST["isWolframResponse"], time()));
 
     } elseif ($_POST["call"] == "wolframApiCall") {

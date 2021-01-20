@@ -6,8 +6,7 @@
 
     <link rel="icon" href="../../images/Logo.png" type="image/gif" sizes="16x16">
     <title>Chat Bot</title>
-
-     <script type="text/javascript" src="https://unpkg.com/rivescript@latest/dist/rivescript.min.js"></script>
+    
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"
         integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 

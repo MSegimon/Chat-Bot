@@ -17,7 +17,20 @@ function generateBasicResponse(message) {
 
     
     if (isQuestion == 1) {
-        return "I currently do not posses the knowledged to answer this";
+        // Wolfram Alpha Api Inclusion
+        let question = message
+        while (question.includes(" ")) {
+            question = question.replace(" ", "+");
+        }
+        while (question.includes("?")) {
+            question = question.replace("?", "%3f")
+        }
+
+        let url = "http://api.wolframalpha.com/v1/conversation.jsp?appid=77AG43-XX9RTX6KAA&i=";
+        url = url.concat(question);
+
+        console.log(url);
+
     } else if (message.includes("good") || message.includes("nice") || message.includes("excellent")) {
         return "That good to hear. Do you have any more questions";
     } else if (message.includes("bad") || message.includes("not nice") || message.includes("tragic")) {

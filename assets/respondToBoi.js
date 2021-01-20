@@ -32,9 +32,9 @@ function generateBasicResponse(message, callback) {
 
                 });
 
-                callback("Hmm, I don't poses the knowledge to answer that question.");
+                callback("Hmm, I don't possess the knowledge to answer that question.");
             } else {
-                $.post("./ajax.php", { call: "insertTextWithResponse", message: message, isQuestion: isQuestion, response: json.result }, result => {
+                $.post("./ajax.php", { call: "insertTextWithResponse", message: message, isQuestion: isQuestion, response: json.result, isWolframResponse: 1 }, result => {
 
                     //console.log(result);
 

@@ -36,6 +36,10 @@ if (isset($_POST["call"])) {
         
         dbQuery("INSERT INTO `chatbot`(`id`, `text`, `isQuestion`, `response`) VALUES (null,?,?,'')", array($_POST["message"], $_POST["isQuestion"]));
 
+    } elseif ($_POST["call"] == "insertTextWithResponse") {
+
+        dbQuery("INSERT INTO `chatbot`(`id`, `text`, `isQuestion`, `response`) VALUES (null,?,?,?)", array($_POST["message"], $_POST["isQuestion"], $_POST["response"]));
+
     }
 
 }

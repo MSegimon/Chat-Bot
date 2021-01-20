@@ -31,6 +31,11 @@ function generateBasicResponse(message) {
 
         console.log(url);
 
+        $.post("./ajax.php", { call: "insertTextWithResponse", message: message, isQuestion: isQuestion, response:response }, result => {
+        
+        
+        });
+
     } else if (message.includes("good") || message.includes("nice") || message.includes("excellent")) {
         return "That good to hear. Do you have any more questions";
     } else if (message.includes("bad") || message.includes("not nice") || message.includes("tragic")) {

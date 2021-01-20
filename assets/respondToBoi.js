@@ -25,13 +25,23 @@ function generateBasicResponse(message, callback) {
 
             let json = JSON.parse(result);
 
-            $.post("./ajax.php", { call: "insertTextWithResponse", message: message, isQuestion: isQuestion, response:json.result }, result => {
+            if (json.error) {
+                $.post("./ajax.php", { call: "insertText", message: message, isQuestion: isQuestion }, result => {
 
-                //console.log(result);
+                    //console.log(result);
 
-            });
+                });
 
-            callback(json.result);
+                callback("Hmm, I don't poses the knowledge to answer that question.");
+            } else {
+                $.post("./ajax.php", { call: "insertTextWithResponse", message: message, isQuestion: isQuestion, response: json.result }, result => {
+
+                    //console.log(result);
+
+                });
+
+                callback(json.result);
+            }
 
         });
 
@@ -42,8 +52,6 @@ function generateBasicResponse(message, callback) {
     } else {
         callback("tragic");
     }
-    
-
 }
 
 function respondToBoi(message, callBack2) {

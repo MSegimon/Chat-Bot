@@ -1,6 +1,13 @@
 function isItQuestion(message) {
     let fiveWs = ['how', 'what', 'where', 'when', 'why', "what's"];
     let startWords = ["isn't", "are", "did", "was", "has", "will", "should", "may", "could", "would", "can", "do", " does", "is"];
+
+    for (let i = 0; i < fiveWs.length; i++) {
+        const element = fiveWs[i];
+        if (message.includes(element)) {
+            return 1
+        }
+    }
 }
 
 function generateBasicResponse(message, callback) {

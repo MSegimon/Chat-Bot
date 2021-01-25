@@ -5,7 +5,14 @@ function isItQuestion(message) {
     for (let i = 0; i < fiveWs.length; i++) {
         const element = fiveWs[i];
         if (message.includes(element)) {
-            return 1
+            return 1;
+        }
+    }
+
+    for (let i = 0; i < startWords.length; i++) {
+        const element = startWords[i];
+        if (message.indexOf(element) == 0) {
+            return 1;
         }
     }
 }

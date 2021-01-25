@@ -18,16 +18,7 @@ function isItQuestion(message) {
 }
 
 function generateBasicResponse(message, callback) {
-    let isQuestion = 0;
-
-    //Check if question
-    let questionWords = ["how ", "what ", "where ", "why ", "isnt ", "are ", "did ", "was ", "has ", "will ", "should ", "may ", "could ", "would ", "can ", "do ", " does ", "is ", "what's "];
-    for (let i = 0; i < questionWords.length; i++) {
-        if (message.includes(questionWords[i])) {
-            isQuestion = 1;
-        }
-    }
-
+    let isQuestion = isItQuestion(message);
 
     if (isQuestion == 1) {
         

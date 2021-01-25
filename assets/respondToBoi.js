@@ -1,3 +1,8 @@
+function isItQuestion(message) {
+    let fiveWs = ['how', 'what', 'where', 'when', 'why', "what's"];
+    let startWords = ["isn't", "are", "did", "was", "has", "will", "should", "may", "could", "would", "can", "do", " does", "is"];
+}
+
 function generateBasicResponse(message, callback) {
     let isQuestion = 0;
 

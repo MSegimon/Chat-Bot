@@ -21,10 +21,16 @@ if (isset($_POST["call"])) {
         
         $response = dbQuery("SELECT `response` FROM `chatbot` WHERE `text`=?", array($_POST["message"]))[0];
         //$questionCheck = dbQuery("SELECT `isQuestion` FROM `chatbot` WHERE `text`=?", array($_POST["message"]))[0];
+        $time = time();
+        $timeElapsed = $time - $response["timestamp"];
 
         if (isset($response)) {
             
-            echo $response["response"];
+            if ($response["isWolframResponse"] == 1 && $timeElapsed > 604800) {
+                echo "oci33u@whfo3&243igh324)3aoi423uh";
+            } else {
+                echo $response["response"];   
+            }
 
         } else {
 
@@ -34,7 +40,16 @@ if (isset($_POST["call"])) {
 
     } elseif ($_POST["call"] == "insertText") {
         
-        dbQuery("INSERT INTO `chatbot`(`id`, `text`, `isQuestion`, `response`) VALUES (null,?,?,'')", array($_POST["message"], $_POST["isQuestion"]));
+        dbQuery("INSERT INTO `chatbot`(`id`, `text`, `isQuestion`, `response`, `isWolframResponse`, `timestamp`) VALUES (null,?,?,'',0,?)", array($_POST["message"], $_POST["isQuestion"],time()));
+
+    } elseif ($_POST["call"] == "insertTextWithResponse") {
+
+        dbQuery("DELETE FROM `chatbot` WHERE `text`=?", array($_POST["message"]));
+        dbQuery("INSERT INTO `chatbot`(`id`, `text`, `isQuestion`, `response`, `isWolframResponse`, `timestamp`) VALUES (null,?,?,?,?,?)", array($_POST["message"], $_POST["isQuestion"], $_POST["response"], $_POST["isWolframResponse"], time()));
+
+    } elseif ($_POST["call"] == "wolframApiCall") {
+
+        echo file_get_contents("https://api.wolframalpha.com/v1/conversation.jsp?appid=77AG43-XX9RTX6KAA&i=" . $_POST["question"]);
 
     }
 

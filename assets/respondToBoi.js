@@ -1,14 +1,24 @@
-function generateBasicResponse(message, callback) {
-    let isQuestion = 0;
+function isItQuestion(message) {
+    let fiveWs = ['how', 'what', 'where', 'when', 'why', "what's"];
+    let startWords = ["isn't", "are", "did", "was", "has", "will", "should", "may", "could", "would", "can", "do", " does", "is"];
 
-    //Check if question
-    let questionWords = ["how ", "what ", "where ", "why ", "isnt ", "are ", "did ", "was ", "has ", "will ", "should ", "may ", "could ", "would ", "can ", "do ", " does ", "is ", "what's "];
-    for (let i = 0; i < questionWords.length; i++) {
-        if (message.includes(questionWords[i])) {
-            isQuestion = 1;
+    for (let i = 0; i < fiveWs.length; i++) {
+        const element = fiveWs[i];
+        if (message.includes(element)) {
+            return 1;
         }
     }
 
+    for (let i = 0; i < startWords.length; i++) {
+        const element = startWords[i];
+        if (message.indexOf(element) == 0) {
+            return 1;
+        }
+    }
+}
+
+function generateBasicResponse(message, callback) {
+    let isQuestion = isItQuestion(message);
 
     if (isQuestion == 1) {
         

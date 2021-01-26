@@ -1,7 +1,7 @@
 <?php
 
 SESSION_START();
-require_once("../../core/db.php");
+require_once("No Peeking");
 
 if (isset($_POST["call"])) {
     

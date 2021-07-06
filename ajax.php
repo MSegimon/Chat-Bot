@@ -49,7 +49,7 @@ if (isset($_POST["call"])) {
 
     } elseif ($_POST["call"] == "wolframApiCall") {
 
-        echo file_get_contents("https://api.wolframalpha.com/v1/conversation.jsp?appid=77AG43-XX9RTX6KAA&i=" . $_POST["question"]);
+        echo file_get_contents("https://api.wolframalpha.com/v1/conversation.jsp?appid=No Peaking=" . $_POST["question"]);
 
     }
 

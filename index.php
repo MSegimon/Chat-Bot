@@ -14,7 +14,6 @@
     
     <link rel="stylesheet" href="assets/style.css">
 </head>
-<html>
 <body>
     
     <div id="container">

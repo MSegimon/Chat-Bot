@@ -1,5 +1,6 @@
 import pandas as pd
 import time
+import sys
 
 # Other files
 import core
@@ -62,4 +63,5 @@ def isQuestion(text):
     # Disconnect from server
     core.disconnect()
 
-isQuestion("what is the meaning of life")
+arguments = sys.argv
+isQuestion(arguments[1])

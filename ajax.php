@@ -52,7 +52,7 @@ if (isset($_POST["call"])) {
         echo file_get_contents("https://api.wolframalpha.com/v1/conversation.jsp?appid=77AG43-XX9RTX6KAA&i=" . $_POST["question"]);
 
     } else if ($_POST["call"] == "isQuestion") {
-        $command = escapeshellcmd("python3 assets/IsItQuestion/main.py");
+        $command = escapeshellcmd("python3 assets/IsItQuestion/main.py '" . $_POST["message"] . "'");
         $output = shell_exec($command);
         echo $output;
     }

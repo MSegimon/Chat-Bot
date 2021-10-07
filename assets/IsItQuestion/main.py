@@ -43,22 +43,19 @@ def isQuestion(text):
     # The resone for the unknown option is so that manual sorting of text can happen in the begining stages
     if questionsMean > answersMean:
         if otherFunctions.percentageDiff(questionsMean, answersMean) <= threshold:
-            print('Unknown')
+            print(2)
             #core.run_insert_query("INSERT INTO chatbot(id, text, isQuestion, response, isWolframResponse, timestamp) VALUES (null,'" + text + "',2,'',0," + str(int(time.time())) + ")")
             return 2
         else:
-            print('its a question')
-            #core.run_insert_query("INSERT INTO chatbot(id, text, isQuestion, response, isWolframResponse, timestamp) VALUES (null,'" + text + "',1,'',0," + str(int(time.time())) + ")")
-            return 1
+            print(1)
+            #core.run_insert_query("INSERT INTO chatbot(id, text, isQuestion, response, isWolframResponse, timestamp) VALUES (null,'" + text + "',1,'',0," + str(int(time.time())) + ")"
     else:
         if otherFunctions.percentageDiff(answersMean, questionsMean) <= threshold:
-            print('Unknown')
+            print(2)
             #core.run_insert_query("INSERT INTO chatbot(id, text, isQuestion, response, isWolframResponse, timestamp) VALUES (null,'" + text + "',2,'',0," + str(int(time.time())) + ")")
-            return 2
         else:
-            print('it is not a question')
+            print(0)
             #core.run_insert_query("INSERT INTO chatbot(id, text, isQuestion, response, isWolframResponse, timestamp) VALUES (null,'" + text + "',0,'',0," + str(int(time.time())) + ")")
-            return 0
 
     # Disconnect from server
     core.disconnect()

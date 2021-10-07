@@ -1,20 +1,9 @@
 function isItQuestion(message) {
-    let fiveWs = ['how', 'what', 'where', 'when', 'why', "what's"];
-    let startWords = ["isn't", "are", "did", "was", "has", "will", "should", "may", "could", "would", "can", "do", " does", "is"];
+    $.post("./ajax.php", { call: "isQuestion", message: message }, result => {
 
-    for (let i = 0; i < fiveWs.length; i++) {
-        const element = fiveWs[i];
-        if (message.includes(element)) {
-            return 1;
-        }
-    }
+        console.log(result);
 
-    for (let i = 0; i < startWords.length; i++) {
-        const element = startWords[i];
-        if (message.indexOf(element) == 0) {
-            return 1;
-        }
-    }
+    });
 }
 
 function generateBasicResponse(message, callback) {

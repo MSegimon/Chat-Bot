@@ -1,7 +1,7 @@
 <?php
 
 SESSION_START();
-require_once("../../core/db.php");
+require_once("No Peaking");
 
 if (isset($_POST["call"])) {
     
@@ -49,7 +49,7 @@ if (isset($_POST["call"])) {
 
     } elseif ($_POST["call"] == "wolframApiCall") {
 
-        echo file_get_contents("https://api.wolframalpha.com/v1/conversation.jsp?appid=77AG43-XX9RTX6KAA&i=" . $_POST["question"]);
+        echo file_get_contents("https://api.wolframalpha.com/v1/conversation.jsp?appid=No Peaking=" . $_POST["question"]);
 
     } else if ($_POST["call"] == "isQuestion") {
         $command = escapeshellcmd("python3 assets/IsItQuestion/main.py '" . $_POST["message"] . "'");

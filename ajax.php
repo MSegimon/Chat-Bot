@@ -1,7 +1,7 @@
 <?php
 
 SESSION_START();
-require_once("No Peeking");
+require_once("No Peaking");
 
 if (isset($_POST["call"])) {
     
@@ -51,6 +51,10 @@ if (isset($_POST["call"])) {
 
         echo file_get_contents("https://api.wolframalpha.com/v1/conversation.jsp?appid=No Peaking=" . $_POST["question"]);
 
+    } else if ($_POST["call"] == "isQuestion") {
+        $command = escapeshellcmd("python3 assets/IsItQuestion/main.py '" . $_POST["message"] . "'");
+        $output = shell_exec($command);
+        echo $output;
     }
 
 }
